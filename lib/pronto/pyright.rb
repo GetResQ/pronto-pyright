@@ -31,10 +31,7 @@ module Pronto
 
       return [] if file_args.empty?
 
-      # Running on entire project for now
-      # Import detection does not work properly when running on files
-      # https://github.com/microsoft/pyright/issues/1015
-      stdout, stderr, = Open3.capture3("#{pyright_executable} --lib --outputjson")
+      stdout, stderr, = Open3.capture3("#{pyright_executable} --lib -v --outputjson #{file_args}")
       stderr.strip!
 
       puts "WARN: pronto-pyright:\n\n#{stderr}" unless stderr.empty?
@@ -55,7 +52,7 @@ module Pronto
     private
 
     def pyright_executable
-      'npx pyright'
+      'pyright'
     end
 
     def python_patches
