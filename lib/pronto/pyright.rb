@@ -52,7 +52,7 @@ module Pronto
     private
 
     def pyright_executable
-      'pyright'
+      'npx pyright'
     end
 
     def python_patches
